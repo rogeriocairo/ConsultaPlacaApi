@@ -28,16 +28,14 @@ namespace ConsultaPlacaMvc.Controllers
                 client.BaseAddress = new Uri("https://localhost:44327/api/");
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                client.BaseAddress = new Uri("https://localhost:44327/api/");
+                               
                 var response = await client.GetAsync("Veiculos/abc-1234");
-
                 var result =  response.Content.ReadAsStringAsync().Result;
-
-                JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
+                var jsonSerializer = new JavaScriptSerializer();
                 var veiculo = JsonConvert.DeserializeObject<Veiculo>(result);
 
                 _context.Add(veiculo);
+
                 await _context.SaveChangesAsync();                
             }           
 
